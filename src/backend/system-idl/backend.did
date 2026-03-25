@@ -1,0 +1,24 @@
+type AuthResult = record {
+  token : opt text;
+  success : bool;
+  message : text;
+};
+type MappingResult = record {
+  status : text;
+  data : vec MappingRow;
+};
+type MappingRow = record {
+  requirement_id : text;
+  compliance_status : text;
+  regulatory_clause : text;
+  notes : text;
+  user_story : text;
+};
+service : {
+  _initializeAccessControlWithSecret : (text) -> ();
+  login : (text, text) -> (AuthResult);
+  logout : (text) -> (bool);
+  runMapping : (text, text, text, text) -> (MappingResult);
+  signup : (text, text) -> (AuthResult);
+  validateSession : (text) -> (opt text) query;
+};
